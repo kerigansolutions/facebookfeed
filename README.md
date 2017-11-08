@@ -15,7 +15,11 @@ $feed          = new KeriganSolutions\FacebookFeed\FacebookFeed();
 $numberOfPosts = 5;
 
 $results = $feed->fetch($numberOfPosts);
-echo '<pre>',print_r($results),'</pre>';
+
+foreach ($results->data as $result) {
+    echo "Photo Url: {$feed->photo($result)} \r\n";
+    echo "Message: {$result->message} \r\n";
+}
 ```
 
 ## Example results
