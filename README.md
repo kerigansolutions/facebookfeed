@@ -58,9 +58,10 @@ $numberOfPosts = 5;
 
 $results = $feed->fetch($numberOfPosts);
 
+// Loop through the posts and demonstrate the difference
 foreach ($results->data as $result) {
-    $badPhotoUrl  = $result->picture;
-    $goodPhotoUrl = $feed->photo($result);
+    $badPhotoUrl  = $result->picture; // too small!
+    $goodPhotoUrl = $feed->photo($result); //just right!
 
     echo "<h3>Bad Photo:</h3> <img src='{$badPhotoUrl}' /><br>";
     echo "<h3>Good Photo:</h3> <img src='{$goodPhotoUrl}' /><br>";
