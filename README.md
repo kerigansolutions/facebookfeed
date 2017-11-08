@@ -16,10 +16,8 @@ $numberOfPosts = 5;
 
 $results = $feed->fetch($numberOfPosts);
 
-foreach ($results->data as $result) {
-    echo "Photo Url: {$feed->photo($result)} \r\n";
-    echo "Message: {$result->message} \r\n";
-}
+echo '<pre>',print_r($results),'</pre>';
+
 ```
 
 ## Example results
@@ -51,3 +49,22 @@ Dr. Doe is a Baton Rouge native and LSU Graduate. During orthopaedic surgery res
         )
 )
 ```
+## Getting better photos
+```php
+
+$feed          = new KeriganSolutions\FacebookFeed\FacebookFeed();
+$numberOfPosts = 5;
+
+$results = $feed->fetch($numberOfPosts);
+
+foreach ($results->data as $result) {
+    $badPhotoUrl  = $result->picture;
+    $goodPhotoUrl = $feed->photo($result);
+
+    echo "<h3>Bad Photo:</h3> <img src='{$badPhotoUrl}' /><br>";
+    echo "<h3>Good Photo:</h3> <img src='{$goodPhotoUrl}' /><br>";
+    echo "<br><hr>";
+}
+
+```
+
