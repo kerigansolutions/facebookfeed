@@ -5,7 +5,7 @@
     },
     "autoload": {
         "psr-4" : {
-            "Kerigan\\Facebook\\" : "src"
+            "KeriganSolutions\\FacebookFeed\\" : "src"
         }
     }
 }
