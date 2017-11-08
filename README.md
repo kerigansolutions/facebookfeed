@@ -50,6 +50,7 @@ Dr. Doe is a Baton Rouge native and LSU Graduate. During orthopaedic surgery res
 )
 ```
 ## Getting better photos
+Many times, the photo returned from Facebook is too small to use on the frontend of your application. Use the `photo()` method on the feed object and pass it the Facebook post like so: 
 ```php
 
 $feed          = new KeriganSolutions\FacebookFeed\FacebookFeed();
