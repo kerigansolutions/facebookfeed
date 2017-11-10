@@ -1,6 +1,10 @@
 <?php
 namespace KeriganSolutions\FacebookFeed;
 
+/**
+ * @version 0.5
+ */
+
 use GuzzleHttp\Client;
 
 class FacebookFeed
@@ -12,51 +16,51 @@ class FacebookFeed
     public function fetch($limit = 5)
     {
         $client = new Client([
-            'base_uri' => 'https://graph.facebook.com/v2.9'
+            'base_uri' => 'https://graph.facebook.com/v2.11'
         ]);
 
         $page_id      = FACEBOOK_PAGE_ID;
         $access_token = FACEBOOK_ACCESS_TOKEN;
-        $fields       = 'id,message,link,name,caption,description,created_time,updated_time,picture,object_id,type';
+        $fields       = 'full_picture,message,object_id,type,status_type,caption,created_time,link,updated_time';
         $response     = $client->request('GET', '/' . $page_id . '/posts/?fields=' . $fields . '&limit=' . $limit . '&access_token=' . $access_token);
         $feed         = json_decode($response->getBody());
         return $feed;
     }
 
-    /**
-     * Retrieve the photo for the specified resource
-     * @param  array   $fbpost
-     * @return string  $photo_url
-     */
-    public function photo($fbpost)
-    {
-        $client = new Client([
-            'base_uri' => 'https://graph.facebook.com/v2.9'
-        ]);
-        $access_token = FACEBOOK_ACCESS_TOKEN;
-        if ($fbpost->type == 'link') {
-            $response  = $client->request('GET', '/?id=' . $fbpost->link . '&access_token=' . $access_token);
-            $returned  = json_decode($response->getBody());
-            if (! isset($returned->og_object->id)) {
-                $fbpost->type = 'foo'; //no og_object, so change type to skip this conditional
-                return $this->photo($fbpost);
-            }
-            $og_id     = $returned->og_object->id;
-            $response  = $client->request('GET', '/' . $og_id . '/?fields=image&access_token=' . $access_token);
-            $returned  = json_decode($response->getBody());
-            $photo_url = $returned->image[0]->url;
-        } else {
-            $response  = $client->request('GET', '/' . $fbpost->id . '/?fields=object_id&access_token=' . $access_token);
-            $returned  = json_decode($response->getBody());
-            if ($fbpost->type == 'video') {
-                $photo_url = $fbpost->link;
-            } elseif ($fbpost->type == 'status') {
-                $photo_url = 'http://bjcbr.dev/wp-content/uploads/2017/10/baton-rouge-bjcbr.jpg';
-            } else {
-                $object_id = $returned->object_id;
-                $photo_url = 'https://graph.facebook.com/v2.9/' . $object_id . '/picture?access_token=' . $access_token;
-            }
-        }
-        return $photo_url;
-    }
+    // /**
+    //  * Retrieve the photo for the specified resource
+    //  * @param  array   $fbpost
+    //  * @return string  $photo_url
+    //  */
+    // public function photo($fbpost)
+    // {
+    //     $client = new Client([
+    //         'base_uri' => 'https://graph.facebook.com/v2.9'
+    //     ]);
+    //     $access_token = FACEBOOK_ACCESS_TOKEN;
+    //     if ($fbpost->type == 'link') {
+    //         $response  = $client->request('GET', '/?id=' . $fbpost->link . '&access_token=' . $access_token);
+    //         $returned  = json_decode($response->getBody());
+    //         if (! isset($returned->og_object->id)) {
+    //             $fbpost->type = 'foo'; //no og_object, so change type to skip this conditional
+    //             return $this->photo($fbpost);
+    //         }
+    //         $og_id     = $returned->og_object->id;
+    //         $response  = $client->request('GET', '/' . $og_id . '/?fields=image&access_token=' . $access_token);
+    //         $returned  = json_decode($response->getBody());
+    //         $photo_url = $returned->image[0]->url;
+    //     } else {
+    //         $response  = $client->request('GET', '/' . $fbpost->id . '/?fields=object_id&access_token=' . $access_token);
+    //         $returned  = json_decode($response->getBody());
+    //         if ($fbpost->type == 'video') {
+    //             $photo_url = $fbpost->link;
+    //         } elseif ($fbpost->type == 'status') {
+    //             $photo_url = 'http://bjcbr.dev/wp-content/uploads/2017/10/baton-rouge-bjcbr.jpg';
+    //         } else {
+    //             $object_id = $returned->object_id;
+    //             $photo_url = 'https://graph.facebook.com/v2.9/' . $object_id . '/picture?access_token=' . $access_token;
+    //         }
+    //     }
+    //     return $photo_url;
+    // }
 }
