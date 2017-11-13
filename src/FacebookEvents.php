@@ -13,7 +13,11 @@ class FacebookEvents
 
         $page_id      = FACEBOOK_PAGE_ID;
         $access_token = FACEBOOK_ACCESS_TOKEN;
-        $response     = $client->request('GET', '/' . $page_id . '/events/?limit=' . $limit . '&access_token=' . $access_token);
+        $fields       = 'description,end_time,name,place,start_time,cover';
+        $response     = $client->request(
+            'GET',
+            '/' . $page_id . '/events/?fields='. $fields .'&limit=' . $limit . '&access_token=' . $access_token
+        );
 
         $feed = json_decode($response->getBody());
 
