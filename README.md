@@ -86,6 +86,11 @@ In order to handle embedding videos from your Facebook statuses on to your WordP
 ## Events
 Events are handled similarly to posts.
 ```php
+$fb     = new KeriganSolutions\FacebookFeed\FacebookEvents();
+$before = null;
+$after  = null;
+$events = $fb->fetch(10, $before, $after);
 
-
+echo '<pre>',print_r($events),'</pre>';
+```
 
