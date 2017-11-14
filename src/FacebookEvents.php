@@ -5,7 +5,7 @@ use GuzzleHttp\Client;
 
 class FacebookEvents
 {
-    public function fetch($limit = 5)
+    public function fetch($limit = 5, $before = null, $after = null)
     {
         $client = new Client([
             'base_uri' => 'https://graph.facebook.com/v2.9'
@@ -16,7 +16,11 @@ class FacebookEvents
         $fields       = 'description,end_time,name,place,start_time,cover';
         $response     = $client->request(
             'GET',
-            '/' . $page_id . '/events/?fields='. $fields .'&limit=' . $limit . '&access_token=' . $access_token
+            '/' . $page_id . '/events/?fields='. $fields .
+            '&limit='        . $limit .
+            '&before='       . $before .
+            '&after='        . $after .
+            '&access_token=' . $access_token
         );
 
         $feed = json_decode($response->getBody());

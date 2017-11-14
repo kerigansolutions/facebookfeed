@@ -27,10 +27,10 @@ class FacebookFeed
         $response     = $client->request(
             'GET',
             '/' . $page_id . '/posts/?fields=' . $fields .
-            '&limit=' . $limit .
+            '&limit='        . $limit .
             '&access_token=' . $access_token .
-            '&before=' . $before .
-            '&after=' . $after
+            '&before='       . $before .
+            '&after='        . $after
         );
 
         $feed = json_decode($response->getBody());

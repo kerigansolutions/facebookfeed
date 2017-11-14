@@ -84,4 +84,8 @@ echo '<pre>',print_r($results),'</pre>';
 In order to handle embedding videos from your Facebook statuses on to your WordPress page, you'll need to conditionally check if the `post->type` is `video`, set up a standard iframe and pass the returned `link` value for the post into the `src` attribute. The package currently handles embedded Facebook, Vimeo, and Youtube videos. 
 
 ## Events
+Events are handled similarly to posts.
+```php
+
+
 
