@@ -13,7 +13,7 @@ Easily pull posts and events into your WordPress Site from a Facebook page that 
     + Create a new app in the [Facebook Developer Console](https://developers.facebook.com/apps/)
     + Use the [Access Token tool](https://developers.facebook.com/tools/accesstoken/) to retrieve your App Access Token
 
-### Add your Facebook Page ID and Access Token to `wp-config.php`
+- Add your Facebook Page ID and Access Token to `wp-config.php`
 ```
 define('FACEBOOK_PAGE_ID', 'YOUR FACEBOOK PAGE ID HERE');
 define('FACEBOOK_ACCESS_TOKEN', 'YOUR FACEBOOK TOKEN HERE');
