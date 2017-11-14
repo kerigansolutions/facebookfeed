@@ -58,8 +58,11 @@ We've covered this already. So far, so good. Let's look at the returned data:
 
 From the [Facebook Graph API docs](https://developers.facebook.com/docs/graph-api/using-graph-api):
 >    `before` : This is the cursor that points to the start of the page of data that has been returned. 
+>
 >    `after` : This is the cursor that points to the end of the page of data that has been returned.
+>
 >    `next` : The Graph API endpoint that will return the next page of data. If not included, this is the last page of data. Due to how pagination works with visibility and privacy, it is possible that a page may be empty but contain a 'next' paging link. Stop paging when the 'next' link no longer appears.
+>
 >    `previous` : The Graph API endpoint that will return the previous page of data. If not included, this is the first page of data.
 
 
