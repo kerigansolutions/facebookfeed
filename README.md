@@ -71,7 +71,7 @@ Now we know where the data starts and stops so we can get our next five results 
 $facebookFeed  = new KeriganSolutions\FacebookFeed\FacebookFeed();
 $numberOfPosts = 5;
 $before        = null;
-$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD'
+$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD';
 
 $results = $facebookFeed->fetch($numberOfPosts, $before, $after);
 
