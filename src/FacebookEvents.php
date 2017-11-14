@@ -21,6 +21,6 @@ class FacebookEvents
 
         $feed = json_decode($response->getBody());
 
-        return $feed->data;
+        return $feed;
     }
 }

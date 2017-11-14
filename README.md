@@ -78,8 +78,10 @@ $results = $facebookFeed->fetch($numberOfPosts, $before, $after);
 echo '<pre>',print_r($results),'</pre>';
 
 ```
-*NOTE: Cursors can change frequently and without warning from Facebook. DO NOT STORE cursors. Grab them dynamically and pass them to the next page using GET variables*
+*NOTE: Cursors can change frequently and without warning from Facebook. DO NOT STORE cursors. Grab them dynamically and pass them to the next page using GET variables or another similar method*
 
 ## Embedded videos
-In order to handle embedding videos from your Facebook statuses on to your WordPress page, you'll need to set up a standard iframe and pass the returned `link` value for the post into the `src` attribute. The package currently handles embedded Facebook, Vimeo, and Youtube videos. 
+In order to handle embedding videos from your Facebook statuses on to your WordPress page, you'll need to conditionally check if the `post->type` is `video`, set up a standard iframe and pass the returned `link` value for the post into the `src` attribute. The package currently handles embedded Facebook, Vimeo, and Youtube videos. 
+
+## Events
 
