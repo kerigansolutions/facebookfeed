@@ -43,7 +43,7 @@ We've covered this already. So far, so good. Let's look at the returned data:
 {
   "data": [
     {
-      // Facebook Post Data is in here, but we're concerned with the paging
+      // Data
     }
   ],
   "paging": {
@@ -58,12 +58,6 @@ We've covered this already. So far, so good. Let's look at the returned data:
 
 From the [Facebook Graph API docs](https://developers.facebook.com/docs/graph-api/using-graph-api):
 >A cursor-paginated edge supports the following parameters:
-
-    before : This is the cursor that points to the start of the page of data that has been returned.
-    after : This is the cursor that points to the end of the page of data that has been returned.
-    limit : This is the maximum number of objects that may be returned. A query may return fewer than the limit value due to filtering. Do not depend on the number of results being fewer than the limit value to indicate your query reached the end of the list of data, use the absence of next instead as described below. For example, if you set limit to 20, 20 objects will be found but, due to privacy filtering, only 9 are shown. If you reset limit to 40, 40 objects will be found but, again due to filtering, only 12 are returned. If there is no result in your search, there will be no pagination and no indication that more items are available, though there can be more items if you increase limit. Some edges may also have a maximum on the limit value for performance reasons.
-    next : The Graph API endpoint that will return the next page of data. If not included, this is the last page of data. Due to how pagination works with visibility and privacy, it is possible that a page may be empty but contain a 'next' paging link. Stop paging when the 'next' link no longer appears.
-    previous : The Graph API endpoint that will return the previous page of data. If not included, this is the first page of data.
 
 
 
