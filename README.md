@@ -22,7 +22,7 @@ define('FACEBOOK_ACCESS_TOKEN', 'YOUR FACEBOOK TOKEN HERE');
 ```php
 
 $facebookFeed  = new KeriganSolutions\FacebookFeed\FacebookFeed();
-$numberOfPosts = 1;
+$numberOfPosts = 5;
 
 $results = $facebookFeed->fetch($numberOfPosts);
 
@@ -65,6 +65,21 @@ From the [Facebook Graph API docs](https://developers.facebook.com/docs/graph-ap
 >
 >    `previous` : The Graph API endpoint that will return the previous page of data. If not included, this is the first page of data.
 
+### What does this mean?
+Now we know where the data starts and stops so we can get our next five results by passing some new arguments to the `fetch` function. Observe:
+```php
+$facebookFeed  = new KeriganSolutions\FacebookFeed\FacebookFeed();
+$numberOfPosts = 5;
+$before        = null;
+$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD'
 
+$results = $facebookFeed->fetch($numberOfPosts, $before, $after);
 
+echo '<pre>',print_r($results),'</pre>';
+
+```
+*NOTE: Cursors can change frequently and without warning from Facebook. DO NOT STORE cursors. Grab them dynamically and pass them to the next page using GET variables*
+
+## Embedded videos
+In order to handle embedding videos from your Facebook statuses on to your WordPress page, you'll need to set up a standard iframe and pass the returned `link` value for the post into the `src` attribute. The package currently handles embedded Facebook, Vimeo, and Youtube videos. 
 
