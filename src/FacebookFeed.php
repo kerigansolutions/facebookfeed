@@ -2,7 +2,7 @@
 namespace KeriganSolutions\FacebookFeed;
 
 /**
- * @version 0.5
+ * @version 0.12.0
  */
 
 use GuzzleHttp\Client;
@@ -22,7 +22,7 @@ class FacebookFeed
 
         $page_id      = FACEBOOK_PAGE_ID;
         $access_token = FACEBOOK_ACCESS_TOKEN;
-        $fields       = 'full_picture,message,object_id,type,status_type,caption,created_time,link,updated_time';
+        $fields       = 'permalink_url,full_picture,message,object_id,type,status_type,caption,created_time,link,updated_time';
 
         $response     = $client->request(
             'GET',
@@ -40,15 +40,19 @@ class FacebookFeed
 
     protected function parse($feed)
     {
-        $parsedFeed = [];
+        $parsedFeed = [
+            'posts'   => [],
+            'paging' => []
+        ];
 
         foreach ($feed->data as $post) {
             if ($post->type == 'video') {
                 $post->link  = (new FacebookVideo($post))->handle()->link;
             }
-            array_push($parsedFeed, $post);
+            array_push($parsedFeed['posts'], $post);
         }
+        $parsedFeed['paging'] = $feed->paging;
 
-        return $parsedFeed;
+        return (object) $parsedFeed;
     }
 }
