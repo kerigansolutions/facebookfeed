@@ -24,7 +24,7 @@ class FacebookVideo
     private function convertLinkForVimeo()
     {
         $vimeoId = parse_url($this->post->link, PHP_URL_PATH);
-        $this->post->link = 'https://player.vimeo.com/video' . $vimeoId .'?autoplay=0&portrait=0';
+        $this->post->link = 'https://player.vimeo.com/video' . $vimeoId .'?autoplay=0';
 
         return $this->post;
     }

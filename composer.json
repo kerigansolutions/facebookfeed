@@ -7,5 +7,12 @@
         "psr-4" : {
             "KeriganSolutions\\FacebookFeed\\" : "src"
         }
-    }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daron Adkins",
+            "email": "daron.adkins@gmail.com"
+        }
+    ]
 }
