@@ -43,7 +43,7 @@ We've covered this already. So far, so good. Let's look at the returned data:
 {
   "data": [
     {
-      ...
+      "some data here"
     }
   ],
   "paging": {
