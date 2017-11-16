@@ -48,10 +48,10 @@ We've covered this already. So far, so good. Let's look at the returned data:
   ],
   "paging": {
     "cursors": {
-      "before": "Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD",
-      "after": "Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD"
+      "before": "Q2c4U1pXNTBYM0YxWlhYUIhp...",
+      "after": "Q2c4U1pXNTBYM0YxWlhKNVgzT..."
     },
-    "next": "https://graph.facebook.com/v2.11/167644949919449/posts?access_token=*******************************&pretty=0&fields=full_picture%2Cmessage%2Cobject_id%2Ctype%2Cstatus_type%2Ccaption%2Ccreated_time%2Clink%2Cupdated_time&limit=1&after=Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD"
+    "next": "https://graph.facebook.com/v2.11/167644949919449/posts?access_token=..."
   }
 }
 ```
@@ -71,7 +71,7 @@ Now we know where the data starts and stops so we can get our next five results 
 $facebookFeed  = new KeriganSolutions\FacebookFeed\FacebookFeed();
 $numberOfPosts = 5;
 $before        = null;
-$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJsa0R5TXhOamMyTkRRNU5EazVNVGswTkRrNk1UVXhPVEkyTlRJME1URTBOekV6TnpBNU1BOE1ZAWEJwWDNOMGIzSjVYMmxrRHlBeE5qYzJORFE1TkRrNU1UazBORGxmTVRrMU9UUTNNRFl5TkRBM01ERTVOdzhFZAEdsdFpRWmFDdFh2QVE9PQZDZD';
+$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTj...';
 
 $results = $facebookFeed->fetch($numberOfPosts, $before, $after);
 
