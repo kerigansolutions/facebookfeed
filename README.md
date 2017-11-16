@@ -94,3 +94,5 @@ $events = $fb->fetch(10, $before, $after);
 echo '<pre>',print_r($events),'</pre>';
 ```
 
+Docs are a work in progress and a more in-depth guide will be coming soon.
+
