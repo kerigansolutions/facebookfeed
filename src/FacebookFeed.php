@@ -2,7 +2,7 @@
 namespace KeriganSolutions\FacebookFeed;
 
 /**
- * @version 0.12.0
+ * @version 0.13.0
  */
 
 use GuzzleHttp\Client;
@@ -20,17 +20,17 @@ class FacebookFeed
             'base_uri' => 'https://graph.facebook.com/v2.11'
         ]);
 
-        $page_id      = FACEBOOK_PAGE_ID;
+        $page_id = FACEBOOK_PAGE_ID;
         $access_token = FACEBOOK_ACCESS_TOKEN;
-        $fields       = 'permalink_url,full_picture,message,object_id,type,status_type,caption,created_time,link,updated_time';
+        $fields = 'permalink_url,full_picture,message,object_id,type,status_type,caption,created_time,link,attachments{target}';
 
-        $response     = $client->request(
+        $response = $client->request(
             'GET',
             '/' . $page_id . '/posts/?fields=' . $fields .
-            '&limit='        . $limit .
-            '&access_token=' . $access_token .
-            '&before='       . $before .
-            '&after='        . $after
+                '&limit=' . $limit .
+                '&access_token=' . $access_token .
+                '&before=' . $before .
+                '&after=' . $after
         );
 
         $feed = json_decode($response->getBody());
@@ -41,18 +41,35 @@ class FacebookFeed
     protected function parse($feed)
     {
         $parsedFeed = [
-            'posts'   => [],
+            'posts' => [],
             'paging' => []
         ];
 
         foreach ($feed->data as $post) {
             if ($post->type == 'video') {
-                $post->link  = (new FacebookVideo($post))->handle()->link;
+                $post->link = (new FacebookVideo($post))->handle()->link;
+            }
+            if ($post->type == 'event') {
+                $post->full_picture = $this->getEventPhoto($post->attachments->data[0]->target->id);
             }
             array_push($parsedFeed['posts'], $post);
         }
         $parsedFeed['paging'] = $feed->paging;
 
-        return (object) $parsedFeed;
+        return (object)$parsedFeed;
+    }
+
+    protected function getEventPhoto($eventId)
+    {
+        $client = new Client(['base_uri' => 'https://graph.facebook.com/v2.11/']);
+
+        $response = $client->request(
+            'GET',
+            $eventId .
+                '?fields=photos{images}' .
+                '&access_token=' . FACEBOOK_ACCESS_TOKEN
+        );
+
+        return json_decode($response->getBody())->photos->data[0]->images[0]->source;
     }
 }
