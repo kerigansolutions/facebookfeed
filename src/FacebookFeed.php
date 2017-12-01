@@ -22,7 +22,7 @@ class FacebookFeed
 
         $page_id = FACEBOOK_PAGE_ID;
         $access_token = FACEBOOK_ACCESS_TOKEN;
-        $fields = 'permalink_url,full_picture,message,object_id,type,status_type,caption,created_time,link,attachments{target}';
+        $fields = 'permalink_url,full_picture,message,object_id,type,status_type,caption,created_time,link,attachments{target,media}';
 
         $response = $client->request(
             'GET',
@@ -52,11 +52,14 @@ class FacebookFeed
             if ($post->type == 'event') {
                 $post->full_picture = $this->getEventPhoto($post->attachments->data[0]->target->id);
             }
+            if ($post->attachments->data[0]->media->image->width <= 100) {
+                $post->full_picture = null;
+            }
             array_push($parsedFeed['posts'], $post);
         }
         $parsedFeed['paging'] = $feed->paging;
 
-        return (object)$parsedFeed;
+        return (object) $parsedFeed;
     }
 
     protected function getEventPhoto($eventId)
