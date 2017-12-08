@@ -16,6 +16,14 @@ class FacebookFeed
      */
     public function fetch($limit = 5, $before = null, $after = null)
     {
+        $response = $this->getFeed($limit, $before, $after);
+        $feed = json_decode($response->getBody());
+
+        return $this->parse($feed);
+    }
+
+    protected function getFeed($limit, $before, $after)
+    {
         $client = new Client([
             'base_uri' => 'https://graph.facebook.com/v2.11'
         ]);
@@ -24,18 +32,15 @@ class FacebookFeed
         $access_token = FACEBOOK_ACCESS_TOKEN;
         $fields = 'permalink_url,full_picture,message,object_id,type,status_type,caption,created_time,link,attachments{target,media}';
 
-        $response = $client->request(
+        return $client->request(
             'GET',
-            '/' . $page_id . '/posts/?fields=' . $fields .
+            '/' . $page_id . '/posts/?' .
+                'fields=' . $fields .
                 '&limit=' . $limit .
                 '&access_token=' . $access_token .
                 '&before=' . $before .
                 '&after=' . $after
         );
-
-        $feed = json_decode($response->getBody());
-
-        return $this->parse($feed);
     }
 
     protected function parse($feed)
@@ -59,7 +64,7 @@ class FacebookFeed
         }
         $parsedFeed['paging'] = $feed->paging;
 
-        return (object) $parsedFeed;
+        return (object)$parsedFeed;
     }
 
     protected function getEventPhoto($eventId)
@@ -73,6 +78,7 @@ class FacebookFeed
                 '&access_token=' . FACEBOOK_ACCESS_TOKEN
         );
 
+        // the photo
         return json_decode($response->getBody())->photos->data[0]->images[0]->source;
     }
 }
