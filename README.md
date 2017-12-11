@@ -39,21 +39,65 @@ $numberOfPosts = 5;
 $results = $facebookFeed->fetch($numberOfPosts);
 ```
 We've covered this already. So far, so good. Let's look at the returned data:
-```json
-{
-  "data": [
-    {
-      "some data here"
-    }
-  ],
-  "paging": {
-    "cursors": {
-      "before": "Q2c4U1pXNTBYM0YxWlhYUIhp...",
-      "after": "Q2c4U1pXNTBYM0YxWlhKNVgzT..."
-    },
-    "next": "https://graph.facebook.com/v2.11/167644949919449/posts?access_token=..."
-  }
-}
+```
+stdClass Object
+(
+    [posts] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [permalink_url] => https://www.facebook.com/XXXXXXXX/posts/1989865411030718
+                    [full_picture] => https://scontent.xx.fbcdn.net/v/t31.0-8/s720x720/24958917_1989865411030718_66...
+                    [object_id] => 1989865411030718
+                    [type] => photo
+                    [status_type] => added_photos
+                    [created_time] => 2017-12-10T22:51:24+0000
+                    [link] => https://www.facebook.com/XXXXXX/photos/a.1989861894364403.1...
+                    [attachments] => stdClass Object
+                        (
+                            [data] => Array
+                                (
+                                    [0] => stdClass Object
+                                        (
+                                            [target] => stdClass Object
+                                                (
+                                                    [url] => https://www.facebook.com/media/set/?set=ms.c.eJxNV1...
+                                                )
+
+                                            [media] => stdClass Object
+                                                (
+                                                    [image] => stdClass Object
+                                                        (
+                                                            [height] => 478
+                                                            [src] => https://scontent.xx.fbcdn.net/v/t31.0-8/s720x72..
+                                                            [width] => 720
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [id] => 167644949919449_1989865411030718
+                )
+
+        )
+
+    [paging] => stdClass Object
+        (
+            [cursors] => stdClass Object
+                (
+                    [before] => Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJ....
+                    [after] => Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJs...
+                )
+
+            [next] => https://graph.facebook.com/v2.11/167644949919449/posts?access_token=3119470492897...
+        )
+
+)
 ```
 
 From the [Facebook Graph API docs](https://developers.facebook.com/docs/graph-api/using-graph-api):
@@ -71,7 +115,7 @@ Now we know where the data starts and stops so we can get our next five results 
 $facebookFeed  = new KeriganSolutions\FacebookFeed\FacebookFeed();
 $numberOfPosts = 5;
 $before        = null;
-$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTj...';
+$after         = 'Q2c4U1pXNTBYM0YxWlhKNVgzTjBiM0o1WDJs...';
 
 $results = $facebookFeed->fetch($numberOfPosts, $before, $after);
 
