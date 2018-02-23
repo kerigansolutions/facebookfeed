@@ -2,7 +2,7 @@
 namespace KeriganSolutions\FacebookFeed;
 
 /**
- * @version 0.16.0
+ * @version 0.17.0
  */
 
 use GuzzleHttp\Client;
@@ -62,7 +62,8 @@ class FacebookFeed
             if ($post->type == 'event') {
                 $post->full_picture = $this->getEventPhoto($post->attachments->data[0]->target->id);
             }
-            if ($post->attachments->data[0]->media->image->width <= 100) {
+            if (isset($post->attachments->data[0]->media->image->width)
+                && $post->attachments->data[0]->media->image->width <= 100) {
                 $post->full_picture = null;
             }
             array_push($parsedFeed['posts'], $post);
